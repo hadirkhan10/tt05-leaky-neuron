@@ -6,9 +6,9 @@ project:
 # If using an HDL, set wokwi_id as 0 and uncomment and list your source files here. 
 # Source files must be in ./src and you must list each source file separately
   source_files:        
-    - tt_um_seven_segment_seconds.v
+    - tt_um_hadirkhan10_lif_neuron.v
     - decoder.v
-  top_module:  "tt_um_seven_segment_seconds"      # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
+  top_module:  "tt_um_hadirkhan10_lif_neuron"      # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
 
 # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"    # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2 or 8x2
@@ -21,10 +21,10 @@ yaml_version: 4
 #
 # Here is a great example: https://github.com/davidsiaw/tt02-davidsiaw-stackcalc/blob/38c5647f83aad2aec675d566aa3d67b98f0aac81/info.yaml
 documentation: 
-  author:       "Matt Venn"      # Your name
-  title:        "7 segment seconds (Verilog Demo)"      # Project title
+  author:       "Muhammad Hadir Khan"      # Your name
+  title:        "Leaky Integrate-and-Fire Neuron"      # Project title
   language:     "Verilog" # other examples include Verilog, Amaranth, VHDL, etc
-  description:  "Count up to 10, one second at a time."      # Short description of what your project does
+  description:  "Mimics an actual neuron by taking an input current and producing a spike if the membrane potential reaches a certain threshold"      # Short description of what your project does
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
