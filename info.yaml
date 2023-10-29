@@ -8,6 +8,7 @@ project:
   source_files:        
     - tt_um_hadirkhan10_lif_neuron.v
     - lif_neuron.v
+    - fsm.v
   top_module:  "tt_um_hadirkhan10_lif_neuron"      # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
 
 # How many tiles your design occupies? A single tile is about 167x108 uM.
