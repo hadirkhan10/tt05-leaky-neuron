@@ -20,8 +20,11 @@ module tb ();
     reg  clk;
     reg  rst_n;
     reg  ena;
-    reg  [7:0] current;
+    reg  [7:0] ui_in;
+    reg  [6:0] setting;
     reg  [7:0] uio_in;
+
+    assign uio_in = {setting, 1'b0};
 
     wire [7:0] uo_out;
     wire [7:0] uio_out;
@@ -33,7 +36,7 @@ module tb ();
         .VPWR( 1'b1),
         .VGND( 1'b0),
     `endif
-        .ui_in      (current),    // Dedicated inputs
+        .ui_in      (ui_in),    // Dedicated inputs
         .uo_out     (uo_out),   // Dedicated outputs
         .uio_in     (uio_in),   // IOs: Input path
         .uio_out    (uio_out),  // IOs: Output path

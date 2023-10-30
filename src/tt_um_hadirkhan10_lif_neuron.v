@@ -11,10 +11,8 @@ module tt_um_hadirkhan10_lif_neuron (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-    wire [6:0] config_wire;
     // use bidirectionals as outputs
     assign uio_oe = 8'b00000001;
-    assign config_wire = uio_in[1:7];
 
     wire [1:0] state_wire;
 
@@ -22,15 +20,16 @@ module tt_um_hadirkhan10_lif_neuron (
     lif_neuron neuron (
       .clk(clk), 
       .rst_n(rst_n),
-      .current(ui_in),
-      .next_state(uo_out),
+      .ui_in(ui_in),
+      .state(state_wire),
+      .membrane_out(uo_out),
       .spike(uio_out[0])
     );
 
     fsm fsm0 (
       .clk(clk),
       .rst_n(rst_n),
-      .config(config_wire),
+      .setting(uio_in[7:1]),
       .state(state_wire)
     );
 
