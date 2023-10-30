@@ -13,6 +13,7 @@ module tt_um_hadirkhan10_lif_neuron (
 
     // use bidirectionals as outputs
     assign uio_oe = 8'b00000001;
+    assign uio_out[7:1] = 7'd0;
 
     wire [1:0] state_wire;
 
