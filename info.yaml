@@ -25,57 +25,55 @@ documentation:
   author:       "Muhammad Hadir Khan"      # Your name
   title:        "Leaky Integrate-and-Fire Neuron"      # Project title
   language:     "Verilog" # other examples include Verilog, Amaranth, VHDL, etc
-  description:  "Mimics an actual neuron by taking an input current and producing a spike if the membrane potential reaches a certain threshold"      # Short description of what your project does
+  description:  "A Leaky Integrate-and-Fire Neuron that mimics the biological neuron and is configurable from the outside world"
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
-      Uses a set of registers to divide the clock, and then some combinational logic
-      to convert from binary to decimal for the display.
+      The state machine first configures the different parameters of the neuron which is then provided a synaptic current to read out the membrane potential and spiking of the neuron.
+      
+      The configurable parameters of the neuron are: 1) beta (which controls the decay of the membrane potential) 2) threshold (which is used in comparison with the membrane potential to generate a spike)
 
-      Puts the bottom 8 bits of the counter on the bidirectional outputs.
+      Initially, the neuron is in an IDLE state where everything remains 0. Upon configuring the setting bits with `uio_in[7:1]` the state goes to BETA where the `beta` value of the neuron is configured using the `ui_in[7:0]` bits. After which the setting bits is again configured to make the state go
+      to THRESH state which configures the threshold value of the neuron. Finally, the setting bits are used to go to the READ state and the current injection is provided with `ui_in` where the neuron starts to integrate the current onto the membrane potential.
 
-      With all the inputs set to 0, the internal 24 bit compare is set to 10,000,000. This means the
-      counter will increment by one each second.
-
-      If any inputs are non zero, then the input will be used as an bits 11 to 18 of the 24 bit compare register.
-      Example: setting the inputs to 00010000 will program 16384 into the compare register.
-      With a 10MHz clock the counter will increment ~610 times per second.
-
+      At each timestep, the membrane potential is analyzed with `uo_out[7:0]` and the spike is outputted through `uio_out[0]`.
 # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
   how_to_test:  |
-      After reset, the counter should increase by one every second with a 10MHz input clock.
-      Experiment by changing the inputs to change the counting speed.
+    After reset, the neuron is in the idle state and remains there unless the setting bits are configured. Setting the `uio_in[7:1]` bits to 1 changes the state to BETA. After configuring the beta value changing the setting bits to 2 takes to the THRESH state where the threshold of 
+    the neuron is configured. Then changing the setting bits to 3 takes to the READ state where the current is integrated and the membrane potential changes as well as the spike is outputted if the membrane potential becomes equal or greater than the configured threshold.
+    
+    Experiment by changing the beta, threshold and input current values to see how the neuron reacts.
 
 # A description of what the inputs do (e.g. red button, SPI CLK, SPI MOSI, etc).
   inputs:               
-    - compare bit 11
-    - compare bit 12
-    - compare bit 13
-    - compare bit 14
-    - compare bit 15
-    - compare bit 16
-    - compare bit 17
-    - compare bit 18
+    - configure beta, threshold and current
+    - configure beta, threshold and current
+    - configure beta, threshold and current
+    - configure beta, threshold and current
+    - configure beta, threshold and current
+    - configure beta, threshold and current
+    - configure beta, threshold and current
+    - configure beta, threshold and current
 # A description of what the outputs do (e.g. status LED, SPI MISO, etc)
   outputs:
-    - segment a
-    - segment b
-    - segment c
-    - segment d
-    - segment e
-    - segment f
-    - segment g
-    - dot
+    - membrane potential
+    - membrane potential
+    - membrane potential
+    - membrane potential
+    - membrane potential
+    - membrane potential
+    - membrane potential
+    - membrane potential
 # A description of what the bidirectional I/O pins do (e.g. I2C SDA, I2C SCL, etc)
   bidirectional:
-    - second counter bit 0
-    - second counter bit 1
-    - second counter bit 2
-    - second counter bit 3
-    - second counter bit 4
-    - second counter bit 5
-    - second counter bit 6
-    - second counter bit 7
+    - spike output
+    - configure the state
+    - configure the state
+    - configure the state
+    - configure the state
+    - configure the state
+    - configure the state
+    - configure the state
 
 # The following fields are optional
   tag:          "neuromorphic, neuron"      # comma separated list of tags: test, encryption, experiment, clock, animation, utility, industrial, pwm, fpga, alu, microprocessor, risc, riscv, sensor, signal generator, fft, filter, music, bcd, sound, serial, timer, random number generator, calculator, decoder, counter, puzzle, multiplier, game, oscillator,
