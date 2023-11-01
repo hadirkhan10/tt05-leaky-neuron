@@ -9,7 +9,6 @@ module lif_neuron (
 
 reg [7:0] membrane, threshold, beta;
 
-/* assign next_state = current + (spike ? 0 : state >> 1); */
 assign spike = (state == 2'b11) ? membrane >= threshold : 0;
 
 assign membrane_out = membrane;
