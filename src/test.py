@@ -20,13 +20,13 @@ async def test_lif_neuron(dut):
     dut.ui_in.value = 1
     # go to the beta state
     dut.setting.value = 1
-    await ClockCycles(dut.clk, 125)
+    await ClockCycles(dut.clk, 2)
     # go to the thresh state
     dut.setting.value = 2
     await ClockCycles(dut.clk, 1)
     # now set the value of threshold
     dut.ui_in.value = 32
-    await ClockCycles(dut.clk, 5)
+    await ClockCycles(dut.clk, 2)
     # go to the read state
     dut.setting.value = 3
     await ClockCycles(dut.clk, 1)
@@ -38,7 +38,7 @@ async def test_lif_neuron(dut):
     # - thres = 127
     # - current = 50
     dut.setting.value = 0
-    await ClockCycles(dut.clk, 5)
+    await ClockCycles(dut.clk, 2)
     # set the value of beta
     dut.ui_in.value = 2
     # go to the beta state
@@ -54,6 +54,6 @@ async def test_lif_neuron(dut):
     dut.setting.value = 3
     await ClockCycles(dut.clk, 1)
     # set the current value
-    dut.ui_in.value = 50
-    await ClockCycles(dut.clk, 550)
+    dut.ui_in.value = 100
+    await ClockCycles(dut.clk, 15)
 
